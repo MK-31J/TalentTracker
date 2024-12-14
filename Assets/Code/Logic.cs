@@ -1,4 +1,6 @@
 ﻿
+using System.Linq;
+
 public class Logic {
 	public static string GetCodeByGrade(int grade) {
 
@@ -27,11 +29,26 @@ public class Logic {
 				return "K";
 			case 12:
 				return "L";
-			case 99:
-				return "X";
+			case 13:
+				return "Z";
+			case 14:
+				return "Y";
 			default:
 				return "A";
 		}
+
+	}
+
+	public static int GetNextIdByGrade(int grade) {
+		
+		var filteredGrade = Engine.ctrl.scores.Where(item => item.Grade == grade)
+								  .Select(item => item.N);
+		int max = 0;
+		if (filteredGrade.Any()) {
+			 max = filteredGrade.Max();
+		}
+		return max+1;
+
 
 	}
 }

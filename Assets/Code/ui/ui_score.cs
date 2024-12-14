@@ -12,7 +12,6 @@ public class ui_score : MonoBehaviour {
     public TextMeshProUGUI  tCode;
     public TextMeshProUGUI  tTitle;
     public TextMeshProUGUI  tComposer;
-    public TextMeshProUGUI  tSize;
     public TextMeshProUGUI  tStart;
     public TextMeshProUGUI  tDay;
     
@@ -33,9 +32,7 @@ public class ui_score : MonoBehaviour {
         tCode.text = _score.Code;
         tTitle.text = _score.Title;
         tComposer.text = _score.Composer;
-        if (_score.Size > 0) {
-            tSize.text = _score.Size.ToString();
-        }
+
         if (_score.StartTime.Year > 1) {
             tStart.text = _score.StartTime.ToString("dd-MM-yyyy");
         }

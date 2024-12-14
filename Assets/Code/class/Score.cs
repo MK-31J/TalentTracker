@@ -9,20 +9,33 @@ public class Score {
 	private int _sts;
 	private string _composer;
 	private string _title;
-	private int _size;
 	private int _style;
 	private DateTime _startTime;
 	private DateTime _endTime;
 
-	public Score(int n, int grade, string composer, string title, int size, int style) {
+	public Score(int n, int grade, string composer, string title, int style) {
 		_n = n;
 		_grade = grade;
 		_code = Logic.GetCodeByGrade(grade) + "" + n.ToString("000");
 		_composer = composer;
 		_title = title;
-		_size = size;
 		_sts = 0;
 		_style = style;
+	}
+	
+	public Score(Score s) {
+		_n = s.N;
+		_grade = s.Grade;
+		_code = Logic.GetCodeByGrade(s.Grade) + "" + s.N.ToString("000");
+		_composer = s.Composer;
+		_title = s.Title;
+		_sts = 0;
+		_style = s.Style;
+	}
+
+	public static Score CreateScore(Score _s) {
+		Score s = new Score(_s);
+		return s;
 	}
 
 	public string Code {
@@ -53,11 +66,6 @@ public class Score {
 	public string Title {
 		get => _title;
 		set => _title = value;
-	}
-
-	public int Size {
-		get => _size;
-		set => _size = value;
 	}
 
 	public int Style {
