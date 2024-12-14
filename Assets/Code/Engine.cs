@@ -39,7 +39,7 @@ public class Engine : MonoBehaviour {
     }
 
     public void InitGame() {
-
+        
         // // json texts
         // // GetLists();
         // Screen.orientation = ScreenOrientation.Portrait;

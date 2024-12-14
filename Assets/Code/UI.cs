@@ -30,12 +30,8 @@ public class UI : MonoBehaviour {
 	// public GameObject pr_circle;
 	// public GameObject pr_word;
 	public GameObject pr_item;
-	public GameObject pr_format;
-	public GameObject pr_genre;
-	public GameObject pr_size;
-	public GameObject pr_lit;
-	public GameObject pr_open_idea;
-	public GameObject pr_job;
+	public GameObject pr_score;
+
 
 
 	// GUI GUI GUI GUI GUI GUI GUI GUI GUI GUI GUI GUI GUI GUI GUI GUI GUI GUI GUI GUI GUI GUI GUI GUI

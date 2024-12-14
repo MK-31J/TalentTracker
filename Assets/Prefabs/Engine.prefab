@@ -80,9 +80,4 @@ MonoBehaviour:
   updMotivation: 0
   updAll: 0
   pr_item: {fileID: 0}
-  pr_format: {fileID: 0}
-  pr_genre: {fileID: 0}
-  pr_size: {fileID: 0}
-  pr_lit: {fileID: 0}
-  pr_open_idea: {fileID: 0}
-  pr_job: {fileID: 0}
+  pr_score: {fileID: 8987906485018205822, guid: e0e29dc06e6569c409bf2c625ef9cae1, type: 3}

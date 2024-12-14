@@ -1,13 +1,27 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Controller : MonoBehaviour {
     
-    private List<Score> scores;
-    
-    
+    public List<Score> scores;
+
+
+    private void Awake() {
+        scores = new List<Score>();
+        
+
+    }
+
     void Start() {
+        GM.Load();
+
+        // scores.Add(new Score(4, 1, "Krieger", "Minuet in A Minor", 0, 1));
+        // scores.Add(new Score(5, 1, "Mozart", "MMMM", 0, 1));
+        // scores.Add(new Score(6, 1, "Duncombe", "DDD", 0, 1));
+        GM.Save();
+        
         
     }
 
