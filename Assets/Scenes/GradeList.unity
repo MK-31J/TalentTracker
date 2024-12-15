@@ -584,7 +584,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trContent: {fileID: 1745818607}
-  btnAddScore: {fileID: 1765020562}
+  btnAddScore: {fileID: 760543198}
+  btnProgress: {fileID: 1765020562}
+  btnInfo: {fileID: 260586597}
 --- !u!1 &280212784
 GameObject:
   m_ObjectHideFlags: 0

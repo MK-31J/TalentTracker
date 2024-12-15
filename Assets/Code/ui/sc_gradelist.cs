@@ -7,13 +7,14 @@ public class sc_gradelist : MonoBehaviour {
 
     public Transform trContent;
     public Button btnAddScore;
-    public Button btnGradList;
+    public Button btnProgress;
     public Button btnInfo;
     
     void Start() {
         
         btnAddScore.onClick.AddListener(Engine.ins.CreateScore);
-        btnGradList.onClick.AddListener(Engine.ins.ShowGradeList);
+        btnProgress.onClick.AddListener(Engine.ins.ShowProgressPace);
+        btnInfo.onClick.AddListener(ExportData);
     
         if (Engine.ctrl.scores != null) {
             Engine.ui.DeleteDiv(trContent);
@@ -26,8 +27,13 @@ public class sc_gradelist : MonoBehaviour {
         }
     }
 
+    private void ExportData() {
+        CSVExporter.ExportScoresToCSV();
+        CSVExporter.ExportProgressToCSV();
+    }
+    
 
 
-
+    
 
 }

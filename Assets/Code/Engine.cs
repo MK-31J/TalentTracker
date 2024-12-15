@@ -139,8 +139,11 @@ public class Engine : MonoBehaviour {
     public void CreateRec() {
         SetScene("RecCreate");
     }
-    
-    
+
+
+    public void ShowProgressPace() {
+        SetScene("ProgressPace");
+    }
 }
 
 
