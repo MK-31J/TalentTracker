@@ -46,7 +46,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 355bf7594c47308489ec024ee0707483, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  game: {fileID: 0}
   stats: 
 --- !u!114 &3937881283448396579
 MonoBehaviour:
@@ -60,6 +59,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0572f3268db3d734fa4a37ab718a3e80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scores: []
+  recs: []
 --- !u!114 &3937881283448396580
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -81,3 +82,4 @@ MonoBehaviour:
   updAll: 0
   pr_item: {fileID: 0}
   pr_score: {fileID: 8987906485018205822, guid: e0e29dc06e6569c409bf2c625ef9cae1, type: 3}
+  pr_rec: {fileID: 8987906485018205822, guid: 34372770384ff724ba4acd7f13e6ecd6, type: 3}

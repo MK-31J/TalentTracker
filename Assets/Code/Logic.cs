@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Linq;
 
 public class Logic {
@@ -50,5 +51,24 @@ public class Logic {
 		return max+1;
 
 
+	}
+
+	public static bool IsScoreExcByCode(string vCode) {
+		foreach (var v in Engine.ctrl.scores) {
+			if (v.Code == vCode && v.Grade > 12) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public static bool FindRecToday() {
+		foreach (var v in Engine.ctrl.recs) {
+			if (v.Day.Date == DateTime.Today.Date) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 }

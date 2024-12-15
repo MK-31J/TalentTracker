@@ -967,6 +967,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d9992d1eb0dbbd4ab89ee6ab690980a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  trContent: {fileID: 135857764}
   btnAddRec: {fileID: 1800127555}
 --- !u!1 &280212784
 GameObject:

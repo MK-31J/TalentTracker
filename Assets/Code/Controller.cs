@@ -19,12 +19,13 @@ public class Controller : MonoBehaviour {
     void Start() {
         GM.Load();
 
+
         // scores.Add(new Score(4, 1, "Krieger", "Minuet in A Minor", 0, 1));
         // scores.Add(new Score(5, 1, "Mozart", "MMMM", 0, 1));
         // scores.Add(new Score(6, 1, "Duncombe", "DDD", 0, 1));
         // GM.Save();
-        
-        
+
+
     }
 
     // Update is called once per frame

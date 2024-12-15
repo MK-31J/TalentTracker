@@ -20,6 +20,7 @@ using UnityEditor.U2D.Path.GUIFramework;
 // todo: rec edit
 // todo: add graphic
 // todo: swap should show filtered information (grade, month)
+// todo: filter the rec comp by the level - it is not working now
 
 
 

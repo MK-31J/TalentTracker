@@ -74,8 +74,10 @@ public class sc_rec_create : MonoBehaviour {
             for (int i = 0; i < bComp.childCount; i++) {
                 bComp.GetChild(i).gameObject.SetActive(false);
             }
-            // todo: consider the number of filtered bigger than children
-            for (int i = 0; i < filteredChoices.Count; i++) {
+            
+            var c = filteredChoices.Count > bComp.childCount ? bComp.childCount : filteredChoices.Count;
+            
+            for (int i = 0; i < c; i++) {
                 var n = i;
                 bComp.GetChild(i).GetChild(0).GetComponent<TextMeshProUGUI>().text = 
                                                     filteredChoices[i].Code + 
@@ -124,11 +126,37 @@ public class sc_rec_create : MonoBehaviour {
     }
     
     private void SaveRec() {
-         _rec = new Rec(_dt);
-         _rec.Exercises.Add(new Exercise(_code, _quarter));
-        Engine.ctrl.recs.Add(Rec.CreateRec(_rec));
-        GM.Save();
-        Engine.ins.SetScene("ProgressPace");
+        if (!Logic.FindRecToday()) {
+            _rec = new Rec(_dt);
+            _rec.Exercises.Add(new Exercise(_code, _quarter));
+            Engine.ctrl.recs.Add(Rec.CreateRec(_rec));
+            GM.Save();
+            Engine.ins.SetScene("ProgressPace");
+        } else {
+            var found = false;
+
+            foreach (var t in Engine.ctrl.recs) {
+
+                if (t.Day.Date == DateTime.Today.Date) {
+                    foreach (var t1 in t.Exercises) {
+                        var exercise = t1;
+                        if (exercise._code == _code) {
+                            exercise._quarter += _quarter;
+                            found = true;
+                            Engine.ins.SetScene("ProgressPace");
+                        }
+                    }
+                    if (!found) {
+                        t.Exercises.Add(new Exercise(_code, _quarter));
+                        GM.Save();
+                        Engine.ins.SetScene("ProgressPace");
+                    }
+                }
+                
+            }
+
+
+        }
     }
     
     private void CancelCreate() {

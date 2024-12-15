@@ -55,9 +55,17 @@ public class sc_score_create : MonoBehaviour {
 
     }
 
+
+
     private void OnTitleInputChanged(string arg0) {
+
         var substr = arg0.ToLower();
         if (substr == "") return;
+        
+        if (substr.Length > 2) {
+            trTitle.gameObject.SetActive(false);
+            return;
+        }
         
         var filteredChoices = Engine.ctrl.scores
                                     .Where(item => item.Title.ToLower().StartsWith(substr))
@@ -67,11 +75,13 @@ public class sc_score_create : MonoBehaviour {
         if (filteredChoices.Count > 0) {
             trTitle.gameObject.SetActive(true);
             
-            for (int i = 0; i < bTitle.childCount; i++) {
+            for (var i = 0; i < bTitle.childCount; i++) {
                 bTitle.GetChild(i).gameObject.SetActive(false);
             }
 
-            for (int i = 0; i < filteredChoices.Count; i++) {
+            var c = filteredChoices.Count > bTitle.childCount ? bTitle.childCount : filteredChoices.Count;
+            
+            for (var i = 0; i < c; i++) {
                 var n = i;
                 bTitle.GetChild(i).GetChild(0).GetComponent<TextMeshProUGUI>().text = filteredChoices[i].Title;
                 bTitle.GetChild(i).GetComponent<Button>().onClick.AddListener(delegate {
@@ -87,6 +97,11 @@ public class sc_score_create : MonoBehaviour {
         var substr = arg0.ToLower();
         if (substr == "") return;
         
+        if (substr.Length > 2) {
+            trComp.gameObject.SetActive(false);
+            return;
+        }
+        
         var filteredChoices = Engine.ctrl.scores
                                     .Where(item => item.Composer.ToLower().StartsWith(substr))
                                     .DistinctBy(item => item.Composer)                   // Ensure unique composers
@@ -95,11 +110,13 @@ public class sc_score_create : MonoBehaviour {
         if (filteredChoices.Count > 0) {
             trComp.gameObject.SetActive(true);
             
-            for (int i = 0; i < bComp.childCount; i++) {
+            for (var i = 0; i < bComp.childCount; i++) {
                 bComp.GetChild(i).gameObject.SetActive(false);
             }
 
-            for (int i = 0; i < filteredChoices.Count; i++) {
+            var c = filteredChoices.Count > bComp.childCount ? bComp.childCount : filteredChoices.Count;
+            
+            for (var i = 0; i < c; i++) {
                 var n = i;
                 bComp.GetChild(i).GetChild(0).GetComponent<TextMeshProUGUI>().text = filteredChoices[i].Composer;
                 bComp.GetChild(i).GetComponent<Button>().onClick.AddListener(delegate {
@@ -108,10 +125,6 @@ public class sc_score_create : MonoBehaviour {
             }
         }
 
-
-
-        // var filteredGrade = Engine.ctrl.scores.Where(item => item.Grade == grade)
-        //                           .Select(item => item.N);
     }
 
     private void SetTitle(string t) {
