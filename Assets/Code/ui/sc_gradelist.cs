@@ -29,7 +29,5 @@ public class sc_gradelist : MonoBehaviour {
     }
 
 
-    void Update() {
-        
-    }
+
 }

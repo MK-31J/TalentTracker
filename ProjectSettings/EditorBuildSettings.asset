@@ -14,4 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ScoreCreate.unity
     guid: 588e22c3db169ae40bcd2d7bbcbfd78c
+  - enabled: 1
+    path: Assets/Scenes/ProgressPace.unity
+    guid: fab412241c040df4ab0ab1bf54463581
+  - enabled: 1
+    path: Assets/Scenes/RecCreate.unity
+    guid: 2f6a3d9c480a21f4794f53ff46e3db23
   m_configObjects: {}

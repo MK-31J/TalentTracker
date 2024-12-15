@@ -14,6 +14,14 @@ using UnityEditor.U2D.Path.GUIFramework;
 // todo: save the scores - json
 // todo: list of days
 // todo: save the days - json
+// todo: edit score
+// todo: delete the save
+// todo: rec add
+// todo: rec edit
+// todo: add graphic
+// todo: swap should show filtered information (grade, month)
+
+
 
 
 public class Engine : MonoBehaviour {
