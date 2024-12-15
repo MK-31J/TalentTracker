@@ -7,11 +7,13 @@ public class sc_gradelist : MonoBehaviour {
 
     public Transform trContent;
     public Button btnAddScore;
-    
+    public Button btnGradList;
+    public Button btnInfo;
     
     void Start() {
         
-        btnAddScore.onClick.AddListener(CreateScore);
+        btnAddScore.onClick.AddListener(Engine.ins.CreateScore);
+        btnGradList.onClick.AddListener(Engine.ins.ShowGradeList);
     
         if (Engine.ctrl.scores != null) {
             Engine.ui.DeleteDiv(trContent);
@@ -24,9 +26,7 @@ public class sc_gradelist : MonoBehaviour {
         }
     }
 
-    private void CreateScore() {
-        Engine.ins.SetScene("ScoreCreate");
-    }
+
 
 
 

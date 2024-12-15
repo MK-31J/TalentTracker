@@ -7,10 +7,14 @@ public class sc_progress_pace : MonoBehaviour {
     
     public Transform trContent;
     public Button btnAddRec;
-    
+    public Button btnGradList;
+    public Button btnInfo;
 
-    void Start() {
-        btnAddRec.onClick.AddListener(CreateRec);
+
+    private void Start() {
+        btnAddRec.onClick.AddListener(Engine.ins.CreateRec);
+        btnGradList.onClick.AddListener(Engine.ins.ShowGradeList);
+        
         if (Engine.ctrl.recs != null) {
             Engine.ui.DeleteDiv(trContent);
             for (int i = 0; i < Engine.ctrl.recs.Count; i++) {
@@ -22,9 +26,7 @@ public class sc_progress_pace : MonoBehaviour {
         }
     }
 
-    private void CreateRec() {
-        Engine.ins.SetScene("RecCreate");
-    }
+
 
 
 }

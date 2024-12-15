@@ -128,6 +128,18 @@ public class Engine : MonoBehaviour {
         SceneManager.LoadScene(sceneName);
     }
     
+    public void CreateScore() {
+        SetScene("ScoreCreate");
+    }
+    
+    public void ShowGradeList() {
+        SetScene("GradeList");
+    }
+
+    public void CreateRec() {
+        SetScene("RecCreate");
+    }
+    
     
 }
 
