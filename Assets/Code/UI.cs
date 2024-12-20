@@ -32,6 +32,7 @@ public class UI : MonoBehaviour {
 	public GameObject pr_item;
 	public GameObject pr_score;
 	public GameObject pr_rec;
+	public GameObject pr_grade;
 
 
 	// GUI GUI GUI GUI GUI GUI GUI GUI GUI GUI GUI GUI GUI GUI GUI GUI GUI GUI GUI GUI GUI GUI GUI GUI

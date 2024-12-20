@@ -83,3 +83,4 @@ MonoBehaviour:
   pr_item: {fileID: 0}
   pr_score: {fileID: 8987906485018205822, guid: e0e29dc06e6569c409bf2c625ef9cae1, type: 3}
   pr_rec: {fileID: 8987906485018205822, guid: 34372770384ff724ba4acd7f13e6ecd6, type: 3}
+  pr_grade: {fileID: 3877996571722990315, guid: 564e77cd5b50ff14aad7564ad91d7624, type: 3}

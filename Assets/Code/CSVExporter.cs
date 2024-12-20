@@ -26,11 +26,15 @@ public class CSVExporter {
 		using var writer = new StreamWriter(filePath);
 		
 		// Write headers
-		writer.WriteLine("Day,Code1,Quarter1");
+		writer.WriteLine("Day,Code1,Quarter1,Code2,Quarter2,Code3,Quarter3,Code4,Quarter4,Code5,Quarter5,Code6,Quarter6,Code7,Quarter7");
 
 		// Write data rows
 		foreach (var row in Engine.ctrl.recs) {
-			writer.WriteLine($"{row.Day},{row.Exercises[0]._code},{row.Exercises[0]._quarter}");
+			var str = $"{row.Day:dd.MM.yyyy}";
+			foreach (var exercise in row.Exercises) {
+				str += $",{exercise._code},{exercise._quarter}";
+			}
+			writer.WriteLine(str);
 		}
 	}
 }

@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Linq;
+using UnityEngine;
 
 public class Logic {
 	public static string GetCodeByGrade(int grade) {
@@ -71,4 +72,59 @@ public class Logic {
 
 		return false;
 	}
+
+	public static int CountPrcByGrade(int gradeExp) {
+		int pr;
+		double p = 0;
+
+		var allMin = 15 * Engine.ctrl.recs
+									.SelectMany(rec => rec.Exercises)
+									.Sum(exercise => exercise._quarter);
+		var allHours = allMin / 60;
+		
+		var allHoursGrade = CountAllHoursByGrade(gradeExp);
+
+		foreach (var v in Engine.ctrl.grades) {
+			if (v.Exp == gradeExp) {
+				if (allHours < allHoursGrade) {
+					p = (double)allHours / allHoursGrade * 100;
+				} else {
+					p = 100;
+				}
+			}
+		}
+
+		pr = (int)p;
+		return pr;
+	}
+
+	public static int CountAllHoursByGrade(int gradeExp) {
+		int h = 0;
+		foreach (var v in Engine.ctrl.grades) {
+			if (gradeExp >= v.Exp) {
+				h += v.Hour;
+			}
+		}
+
+		return h;
+	}
+	
+	public static int GetCurrentGrade() {
+		int l = 0;
+	
+		var allMin = 15 * Engine.ctrl.recs
+								.SelectMany(rec => rec.Exercises)
+								.Sum(exercise => exercise._quarter);
+		var allHours = allMin / 60;
+
+		foreach (var v in Engine.ctrl.grades) {
+			if (allHours < CountAllHoursByGrade(v.Exp)) {
+				l = v.Exp;
+				break;
+			}
+		}
+	
+		return l;
+	}
+	
 }
