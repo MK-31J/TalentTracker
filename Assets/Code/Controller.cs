@@ -10,6 +10,10 @@ public class Controller : MonoBehaviour {
     public List<Rec> recs;
     public List<Grade> grades;
 
+    public static Score actualScore;
+    public static int stsScoreChange;
+    
+    
 
     private void Awake() {
         scores = new List<Score>();

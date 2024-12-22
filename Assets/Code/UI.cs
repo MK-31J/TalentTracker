@@ -11,10 +11,8 @@ public class UI : MonoBehaviour {
 
 	public bool updHeader;
 	public bool updMsg;
-	public bool updTrend;
-	public bool updScene;
-	public bool updControl;
-	public bool updMotivation;
+	public bool updScoreList;
+
 
 	public bool updAll;
 

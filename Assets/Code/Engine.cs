@@ -113,10 +113,10 @@ public class Engine : MonoBehaviour {
 
  
     void CheckUIUpdate() {
-        // if (ui.updAll) {
-        //     ui.updHeader = true;
-        //     ui.updAll = false;
-        // }
+        if (ui.updAll) {
+            ui.updScoreList = true;
+            ui.updAll = false;
+        }
     }
 
     public void SetScene(string sceneName) {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ui_score : MonoBehaviour {
     
@@ -14,12 +15,11 @@ public class ui_score : MonoBehaviour {
     public TextMeshProUGUI  tComposer;
     public TextMeshProUGUI  tStart;
     public TextMeshProUGUI  tDay;
-    
+    public Button bChange;
 
     void Start() {
         
         StartCoroutine(ExecuteTasks());
-        
     }
 
     IEnumerator ExecuteTasks() {
@@ -29,6 +29,8 @@ public class ui_score : MonoBehaviour {
     
     private void DisplayData() {
  
+        bChange.onClick.AddListener(ChangeData);
+        
         tCode.text = _score.Code;
         tTitle.text = _score.Title;
         tComposer.text = _score.Composer;
@@ -43,10 +45,13 @@ public class ui_score : MonoBehaviour {
         
     }
 
-
-    void Update() {
-        
+    private void ChangeData() {
+        Controller.actualScore = _score;
+        Controller.stsScoreChange = 1;
     }
+
+
+
     
 
 

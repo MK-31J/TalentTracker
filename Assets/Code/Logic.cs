@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Logic {
@@ -126,5 +127,15 @@ public class Logic {
 	
 		return l;
 	}
-	
+
+	public static void ChangeScore(string tCode, string iComposer, string iTitle, string iStart, string iFinish) {
+		foreach (var v in Engine.ctrl.scores) {
+			if (v.Code == tCode) {
+				v.Composer = iComposer;
+				v.Title = iTitle;
+				v.StartTime = DateTime.Parse(iStart);
+				v.EndTime = DateTime.Parse(iFinish);
+			}
+		}
+	}
 }
