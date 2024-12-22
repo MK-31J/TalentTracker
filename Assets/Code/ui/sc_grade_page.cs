@@ -8,11 +8,16 @@ public class sc_grade_page : MonoBehaviour {
 	public Transform trContent;
 	public Button btnScoresList;
 	public Button btnProgress;
+	public Button btnScalePage;
+	public Button btnAddRec;
 
 	void Start() {
         
-		btnScoresList.onClick.AddListener(Engine.ins.ShowGradeList);
+		btnScoresList.onClick.AddListener(Engine.ins.ShowScoreList);
 		btnProgress.onClick.AddListener(Engine.ins.ShowProgressPace);
+		btnScalePage.onClick.AddListener(Engine.ins.ShowScalePage);
+		btnAddRec.onClick.AddListener(Engine.ins.CreateRec);
+
     
 		if (Engine.ctrl.grades != null) {
 			Engine.ui.DeleteDiv(trContent);

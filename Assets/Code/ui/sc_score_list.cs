@@ -3,18 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class sc_gradelist : MonoBehaviour {
+public class sc_score_list : MonoBehaviour {
 
     public Transform trContent;
     public Button btnAddScore;
     public Button btnProgress;
-    public Button btnInfo;
+    public Button btnGradePage;
+    public Button btnScalePage;
     
     void Start() {
         
         btnAddScore.onClick.AddListener(Engine.ins.CreateScore);
         btnProgress.onClick.AddListener(Engine.ins.ShowProgressPace);
-        btnInfo.onClick.AddListener(ExportData);
+        btnScalePage.onClick.AddListener(Engine.ins.ShowScalePage);
+        btnGradePage.onClick.AddListener(Engine.ins.ShowGradePage);
     
         if (Engine.ctrl.scores != null) {
             Engine.ui.DeleteDiv(trContent);
@@ -25,12 +27,15 @@ public class sc_gradelist : MonoBehaviour {
                 script.GetComponent<ui_score>()._n = i;
             }
         }
+
+        RectTransform rectTransform = trContent.GetComponent<RectTransform>();
+        Vector2 size = rectTransform.sizeDelta;
+        size.y = 95 * Engine.ctrl.scores.Count;
+        rectTransform.sizeDelta = size;
+        
     }
 
-    private void ExportData() {
-        CSVExporter.ExportScoresToCSV();
-        CSVExporter.ExportProgressToCSV();
-    }
+
     
 
 

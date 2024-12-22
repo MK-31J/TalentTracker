@@ -11,14 +11,11 @@ using UnityEditor.U2D.Path.GUIFramework;
 
 
 // todo: edit score
-// todo: delete the save
 // todo: rec add
 // todo: rec edit
-// todo: add graphic
-// todo: statistic
+// todo: delete the save
 // todo: swap should show filtered information (grade, month)
 // todo: filter the rec comp by the level - it is not working now
-
 
 
 
@@ -29,7 +26,7 @@ public class Engine : MonoBehaviour {
     public static Controller ctrl;
 
     public GM game;
-    public List<int> stats;
+    // public List<int> stats;
 
 
     private void Awake() {
@@ -48,7 +45,7 @@ public class Engine : MonoBehaviour {
         
         // // json texts
         // // GetLists();
-        // Screen.orientation = ScreenOrientation.Portrait;
+        Screen.orientation = ScreenOrientation.Portrait;
         // ctrl.gameTime = new GameTime(1, 1, 6);
         //
         // StartGame();
@@ -85,20 +82,28 @@ public class Engine : MonoBehaviour {
 
 
     public void EndGame() {
-        // GM.Save();
-        // Input.backButtonLeavesApp = true;
-        // Application.Quit();
+        GM.Save();
+        Input.backButtonLeavesApp = true;
+        Application.Quit();
     }
 
 
     void FixedUpdate() {
         CheckUIUpdate();
-        // RouteShiftState();
         
         // Echo(false, Controller.valHeroNoSleepHours.ToString());
         
     }
     
+    public void ExportData() {
+        CSVExporter.ExportScoresToCSV();
+        CSVExporter.ExportProgressToCSV();
+    }
+
+    public void SaveData() {
+        GM.Save();
+        ExportData();
+    }
     
 
     public static void Echo(bool b, string s) {
@@ -110,12 +115,6 @@ public class Engine : MonoBehaviour {
     void CheckUIUpdate() {
         // if (ui.updAll) {
         //     ui.updHeader = true;
-        //     ui.updMsg = true;
-        //     ui.updTrend = true;
-        //     ui.updScene = true;
-        //     ui.updControl = true;
-        //     ui.updMotivation = true;
-        //
         //     ui.updAll = false;
         // }
     }
@@ -129,18 +128,26 @@ public class Engine : MonoBehaviour {
         SetScene("ScoreCreate");
     }
     
-    public void ShowGradeList() {
-        SetScene("GradeList");
+    public void ShowScoreList() {
+        SetScene("ScoreList");
     }
 
     public void CreateRec() {
         SetScene("RecCreate");
     }
-
-
+    
     public void ShowProgressPace() {
         SetScene("ProgressPace");
     }
+    
+    public void ShowGradePage() {
+        SetScene("GradePage");
+    }
+    
+    public void ShowScalePage() {
+        SetScene("ScalePage");
+    }
+    
 }
 
 

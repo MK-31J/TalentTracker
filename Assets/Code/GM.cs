@@ -25,6 +25,7 @@ public class GM {
         FileStream file = File.Create(Application.persistentDataPath + "/TalentTracker.gd");
         bf.Serialize(file, game);
         file.Close();
+        
     }
     
     public static void Load() {

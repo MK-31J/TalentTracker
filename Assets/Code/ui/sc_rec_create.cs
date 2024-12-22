@@ -43,7 +43,7 @@ public class sc_rec_create : MonoBehaviour {
         }
         
         bSave.onClick.AddListener(SaveRec);
-        bCancel.onClick.AddListener(CancelCreate);
+        bCancel.onClick.AddListener(Engine.ins.ShowProgressPace);
 
         iComposer.onValueChanged.AddListener(OnComposerInputChanged);
         trComp.gameObject.SetActive(false);
@@ -55,9 +55,9 @@ public class sc_rec_create : MonoBehaviour {
     private void SetQuarter(int n) {
         _quarter = n;
         for (int i = 0; i < bQuarter.childCount; i++) {
-            bQuarter.GetChild(i).GetComponent<Image>().color = Color.white;
+            bQuarter.GetChild(i).GetComponent<Image>().color = Meta.clNotActive;
         }
-        bQuarter.GetChild(n-1).GetComponent<Image>().color = Color.green;
+        bQuarter.GetChild(n-1).GetComponent<Image>().color = Meta.clActive;
     }
 
     private void OnComposerInputChanged(string arg0) {
@@ -101,9 +101,9 @@ public class sc_rec_create : MonoBehaviour {
     private void SetGrade(int n) {
         _grade = n;
         for (int i = 0; i < bGrade.childCount; i++) {
-            bGrade.GetChild(i).GetComponent<Image>().color = Color.white;
+            bGrade.GetChild(i).GetComponent<Image>().color = Meta.clNotActive;
         }
-        bGrade.GetChild(n-1).GetComponent<Image>().color = Color.green;
+        bGrade.GetChild(n-1).GetComponent<Image>().color = Meta.clActive;
     }
     
     private void FixedUpdate() {
@@ -130,8 +130,7 @@ public class sc_rec_create : MonoBehaviour {
             _rec = new Rec(_dt);
             _rec.Exercises.Add(new Exercise(_code, _quarter));
             Engine.ctrl.recs.Add(Rec.CreateRec(_rec));
-            GM.Save();
-            Engine.ins.SetScene("ProgressPace");
+
         } else {
             var found = false;
 
@@ -143,23 +142,20 @@ public class sc_rec_create : MonoBehaviour {
                         if (exercise._code == _code) {
                             exercise._quarter += _quarter;
                             found = true;
-                            Engine.ins.SetScene("ProgressPace");
                         }
                     }
                     if (!found) {
                         t.Exercises.Add(new Exercise(_code, _quarter));
-                        GM.Save();
-                        Engine.ins.SetScene("ProgressPace");
+
                     }
                 }
                 
             }
 
-
+            Engine.ins.SaveData();
+            Engine.ins.SetScene("ProgressPace");
         }
     }
     
-    private void CancelCreate() {
-        Engine.ins.SetScene("ProgressPace");
-    }
+
 }

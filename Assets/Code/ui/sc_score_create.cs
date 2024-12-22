@@ -43,7 +43,7 @@ public class sc_score_create : MonoBehaviour {
         }
         
         bSave.onClick.AddListener(SaveScore);
-        bCancel.onClick.AddListener(CancelCreate);
+        bCancel.onClick.AddListener(Engine.ins.ShowScoreList);
 
         iComposer.onValueChanged.AddListener(OnComposerInputChanged);
         iTitle.onValueChanged.AddListener(OnTitleInputChanged);
@@ -140,17 +140,17 @@ public class sc_score_create : MonoBehaviour {
     private void SetGrade(int n) {
         _grade = n;
         for (int i = 0; i < bGrade.childCount; i++) {
-            bGrade.GetChild(i).GetComponent<Image>().color = Color.white;
+            bGrade.GetChild(i).GetComponent<Image>().color = Meta.clNotActive;
         }
-        bGrade.GetChild(n-1).GetComponent<Image>().color = Color.green;
+        bGrade.GetChild(n-1).GetComponent<Image>().color = Meta.clActive;
     }
     
     private void SetStyle(int n) {
         _style = n;
         for (int i = 0; i < bStyle.childCount; i++) {
-            bStyle.GetChild(i).GetComponent<Image>().color = Color.white;
+            bStyle.GetChild(i).GetComponent<Image>().color = Meta.clNotActive;
         }
-        bStyle.GetChild(n).GetComponent<Image>().color = Color.green;
+        bStyle.GetChild(n).GetComponent<Image>().color = Meta.clActive;
     }
 
 
@@ -174,11 +174,9 @@ public class sc_score_create : MonoBehaviour {
     private void SaveScore() {
         _score = new Score(_n, _grade, iComposer.text, iTitle.text, _style);
         Engine.ctrl.scores.Add(Score.CreateScore(_score));
-        GM.Save();
-        Engine.ins.SetScene("GradeList");
+        Engine.ins.SaveData();
+        Engine.ins.ShowScoreList();
     }
     
-    private void CancelCreate() {
-        Engine.ins.SetScene("GradeList");
-    }
+
 }
