@@ -16,6 +16,7 @@ using UnityEditor.U2D.Path.GUIFramework;
 // todo: delete the save
 // todo: swap should show filtered information (grade, month)
 // todo: filter the rec comp by the level - it is not working now
+// todo: clean from rec all days where no exercises
 
 
 

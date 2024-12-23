@@ -12,7 +12,6 @@ public class sc_score_list : MonoBehaviour {
     public Button btnProgress;
     public Button btnGradePage;
     public Button btnScalePage;
-
     
     public Transform trPopup;
     public Image iSts;

@@ -64,9 +64,9 @@ public class Logic {
 		return false;
 	}
 
-	public static bool FindRecToday() {
+	public static bool FindRec(DateTime dt) {
 		foreach (var v in Engine.ctrl.recs) {
-			if (v.Day.Date == DateTime.Today.Date) {
+			if (v.Day.Date == dt.Date) {
 				return true;
 			}
 		}
@@ -136,6 +136,16 @@ public class Logic {
 				v.StartTime = DateTime.Parse(iStart);
 				v.EndTime = DateTime.Parse(iFinish);
 			}
+		}
+	}
+
+	public static void ChangeRec(DateTime actualRecDay, string s) {
+		
+		var rec = Engine.ctrl.recs.FirstOrDefault(r => r.Day == actualRecDay);
+
+		if (rec != null) {
+			// Remove the exercise with the matching code
+			rec.Exercises.RemoveAll(ex => ex.Code == s);
 		}
 	}
 }

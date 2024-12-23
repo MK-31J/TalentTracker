@@ -16,7 +16,8 @@ public class sc_rec_create : MonoBehaviour {
     private string _head;
     private string _code;
 
-    
+
+    public Transform trDay;
     public TextMeshProUGUI  tCode;
     public TMP_InputField iComposer;
     public Transform bGrade;
@@ -26,7 +27,6 @@ public class sc_rec_create : MonoBehaviour {
 
     public Button bSave;
     public Button bCancel;
-    
     
 
     void Start() {
@@ -48,9 +48,34 @@ public class sc_rec_create : MonoBehaviour {
         iComposer.onValueChanged.AddListener(OnComposerInputChanged);
         trComp.gameObject.SetActive(false);
         
+        for (int i = 0; i < trDay.childCount; i++) {
+            var n = i;
+            trDay.GetChild(i).GetComponent<Button>().onClick.AddListener(delegate { ChangeDay(n); });
+        }
+        
         bSave.interactable = false;
         _dt = DateTime.Now;
     }
+
+    private void ChangeDay(int i) {
+        switch (i) {
+            case 0:
+                _dt = _dt.AddDays(-10);
+                break;
+            case 1:
+                _dt = _dt.AddDays(-1);
+                break;
+            case 2:
+                break;
+            case 3:
+                _dt = _dt.AddDays(1);
+                break;
+            case 4:
+                _dt = _dt.AddDays(10);
+                break;
+        }
+    
+}
 
     private void SetQuarter(int n) {
         _quarter = n;
@@ -64,9 +89,12 @@ public class sc_rec_create : MonoBehaviour {
         var substr = arg0.ToLower();
         if (substr == "") return;
         
+        // var filteredChoices = Engine.ctrl.scores
+        //                             .Where(item => item.Composer.ToLower().StartsWith(substr)) // Ensure unique composers
+        //                             .ToList(); 
         var filteredChoices = Engine.ctrl.scores
-                                    .Where(item => item.Composer.ToLower().StartsWith(substr)) // Ensure unique composers
-                                    .ToList(); 
+                                    .Where(item => item.Composer.ToLower().StartsWith(substr) && item.Grade == _grade)
+                                    .ToList();
             
         if (filteredChoices.Count > 0) {
             trComp.gameObject.SetActive(true);
@@ -93,7 +121,7 @@ public class sc_rec_create : MonoBehaviour {
 
     private void SetCompTitle(string cod, string com, string t) {
         iComposer.text = cod + " " + com + ": " + t;
-        _head = _dt.ToString("dd-MM-yyyy") + ": " + cod + " " + com + " " + t;
+        _head = ": " + cod + " " + com + " " + t;
         _code = cod;
         trComp.gameObject.SetActive(false);
     }
@@ -115,7 +143,7 @@ public class sc_rec_create : MonoBehaviour {
     private void UpdateData() {
         if (_grade > 0) {
 
-            tCode.text = _head;
+            tCode.text = _dt.ToString("dd-MM-yyyy") + _head;
             // _n = Logic.GetNextIdByGrade(_grade);
             // tCode.text = Logic.GetCodeByGrade(_grade) + _n.ToString("000");
         }
@@ -126,7 +154,7 @@ public class sc_rec_create : MonoBehaviour {
     }
     
     private void SaveRec() {
-        if (!Logic.FindRecToday()) {
+        if (!Logic.FindRec(_dt)) {
             _rec = new Rec(_dt);
             _rec.Exercises.Add(new Exercise(_code, _quarter));
             Engine.ctrl.recs.Add(Rec.CreateRec(_rec));
@@ -136,7 +164,7 @@ public class sc_rec_create : MonoBehaviour {
 
             foreach (var t in Engine.ctrl.recs) {
 
-                if (t.Day.Date == DateTime.Today.Date) {
+                if (t.Day.Date == _dt.Date) {
                     foreach (var t1 in t.Exercises) {
                         var exercise = t1;
                         if (exercise._code == _code) {

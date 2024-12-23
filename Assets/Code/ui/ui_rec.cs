@@ -12,6 +12,8 @@ public class ui_rec : MonoBehaviour {
 	public TextMeshProUGUI  tWorkTime;
 	public Transform trRep;
 	public Transform trExc;
+	public Button bChange;
+
 
 	void Start() {
         
@@ -26,6 +28,8 @@ public class ui_rec : MonoBehaviour {
     
 	private void DisplayData() {
  
+		bChange.onClick.AddListener(ChangeData);
+		
 		tDay.text = rec.Day.ToString("dd.MM.yy");
 		var workTime = 0;
 		var t = 0;
@@ -46,10 +50,13 @@ public class ui_rec : MonoBehaviour {
 
 		
 		tWorkTime.text = workTime.ToString();
-
-
-
+		
         
+	}
+
+	private void ChangeData() {
+		Controller.actualRec = rec;
+		Controller.stsRecChange = 1;
 	}
 
 	private void ShowQuarters(Transform tr, int vQuarter) {

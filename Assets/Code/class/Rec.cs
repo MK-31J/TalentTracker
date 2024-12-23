@@ -48,4 +48,14 @@ public struct Exercise {
 		_code = code;
 		_quarter = quarter;
 	}
+
+	public string Code {
+		get => _code;
+		set => _code = value;
+	}
+
+	public int Quarter {
+		get => _quarter;
+		set => _quarter = value;
+	}
 }

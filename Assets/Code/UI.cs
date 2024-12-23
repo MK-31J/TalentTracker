@@ -12,6 +12,7 @@ public class UI : MonoBehaviour {
 	public bool updHeader;
 	public bool updMsg;
 	public bool updScoreList;
+	public bool updRecList;
 
 
 	public bool updAll;
