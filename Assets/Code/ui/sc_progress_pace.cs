@@ -14,6 +14,7 @@ public class sc_progress_pace : MonoBehaviour {
     public Button btnScoreList;
     
     public Transform trPopup;
+    public TextMeshProUGUI tTop;
     public Transform trExc;
     public Button btnCancel;
 
@@ -45,6 +46,7 @@ public class sc_progress_pace : MonoBehaviour {
     private void RefreshInfo() {
         if (Controller.stsRecChange == 1) {
             trPopup.gameObject.SetActive(true);
+            tTop.text = Controller.actualRec.Day.ToString("dd.MM.yyyy");
             // reset previous listener
             for (int i = 0; i < trExc.childCount; i++) {
                 trExc.GetChild(i).gameObject.SetActive(true);

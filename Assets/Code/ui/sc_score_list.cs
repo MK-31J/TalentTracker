@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.Linq;
 using TMPro;
 using UnityEngine;
@@ -33,13 +34,14 @@ public class sc_score_list : MonoBehaviour {
     private Vector2 startTouchPosition;
     private Vector2 endTouchPosition;
     
-    public float swipeThreshold = 50f;
+    public float swipeThreshold = 150f;
+    private const string format = "dd.MM.yyyy";
     
     void Start() {
         
         Engine.pageIdx = 1;
         Logic.UpdateScoreSts();
-        
+
         btnAddScore.onClick.AddListener(Engine.CreateScore);
         btnProgress.onClick.AddListener(Engine.ShowProgressPace);
         btnScalePage.onClick.AddListener(Engine.ShowScalePage);
@@ -65,7 +67,7 @@ public class sc_score_list : MonoBehaviour {
     }
 
     private void GradeScoreShowChange() {
-        if (Controller.showGradeScores < 12) {
+        if (Controller.showGradeScores < 14) {
             Controller.showGradeScores++;
         } else {
             Controller.showGradeScores = 1;
@@ -74,21 +76,21 @@ public class sc_score_list : MonoBehaviour {
     }
 
     private void PlusST() {
-        iStart.text = DateTime.Parse(iStart.text).AddDays(1).ToString("dd.MM.yyyy");
+        iStart.text = DateTime.ParseExact(iStart.text, format, CultureInfo.InvariantCulture).AddDays(1).ToString("dd.MM.yyyy");
 
     }
 
     private void MinusST() {
-        iStart.text = DateTime.Parse(iStart.text).AddDays(-1).ToString("dd.MM.yyyy");
+        iStart.text = DateTime.ParseExact(iStart.text, format, CultureInfo.InvariantCulture).AddDays(-1).ToString("dd.MM.yyyy");
 
     }
 
     private void PlusET() {
-        iFinish.text = DateTime.Parse(iFinish.text).AddDays(1).ToString("dd.MM.yyyy");
+        iFinish.text = DateTime.ParseExact(iFinish.text, format, CultureInfo.InvariantCulture).AddDays(1).ToString("dd.MM.yyyy");
     }
 
     private void MinusET() {
-        iFinish.text = DateTime.Parse(iFinish.text).AddDays(-1).ToString("dd.MM.yyyy");
+        iFinish.text = DateTime.ParseExact(iFinish.text, format, CultureInfo.InvariantCulture).AddDays(-1).ToString("dd.MM.yyyy");
     }
 
     private void SetFinCurrent() {
@@ -114,7 +116,12 @@ public class sc_score_list : MonoBehaviour {
 
         // RectTransform rectTransform = trContent.GetComponent<RectTransform>();
         // Vector2 size = rectTransform.sizeDelta;
-        // size.y = 95 * Engine.ctrl.scores.Count;
+        // if (55 * Engine.ctrl.scores.Count < 2000) {
+        //     size.y = 2000;
+        //
+        // } else {
+        //     size.y = 55 * Engine.ctrl.scores.Count;
+        // }
         // rectTransform.sizeDelta = size;
     }
 
@@ -145,11 +152,11 @@ public class sc_score_list : MonoBehaviour {
             iStart.text = Controller.actualScore.StartTime.ToString("dd.MM.yyyy");
             iFinish.text = Controller.actualScore.EndTime.ToString("dd.MM.yyyy");
             
-            if (DateTime.Parse(iStart.text).Year < 2000) {
+            if (DateTime.ParseExact(iStart.text, format, CultureInfo.InvariantCulture).Year < 2000) {
                 btnSTm.interactable = false;
             }
         
-            if (DateTime.Parse(iFinish.text).Year < 2000) {
+            if (DateTime.ParseExact(iFinish.text, format, CultureInfo.InvariantCulture).Year < 2000) {
                 btnETm.interactable = false;
             }
             
@@ -164,14 +171,19 @@ public class sc_score_list : MonoBehaviour {
     
     private void Update() {
         if (SwapDirection() == 1) {
-            Controller.showGradeScores++;
+            if (Controller.showGradeScores > 1) {
+                Controller.showGradeScores--;
+            } else {
+                Controller.showGradeScores = 14;
+            }
             FillScoreList();
-
-
         } else if (SwapDirection() == 2) {
-            Controller.showGradeScores--;
+            if (Controller.showGradeScores < 14) {
+                Controller.showGradeScores++;
+            } else {
+                Controller.showGradeScores = 1;
+            }
             FillScoreList();
-
         }
     }
 
