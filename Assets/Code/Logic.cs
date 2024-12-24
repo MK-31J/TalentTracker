@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Globalization;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -114,8 +115,9 @@ public class Logic {
 			if (v.Code == tCode) {
 				v.Composer = iComposer;
 				v.Title = iTitle;
-				v.StartTime = DateTime.Parse(iStart);
-				v.EndTime = DateTime.Parse(iFinish);
+				const string format = "dd.MM.yyyy";
+				v.StartTime = DateTime.ParseExact(iStart, format, CultureInfo.InvariantCulture);
+				v.EndTime = DateTime.ParseExact(iFinish, format, CultureInfo.InvariantCulture);
 			}
 		}
 	}
