@@ -4,6 +4,10 @@ using UnityEngine.SceneManagement;
 
 // todo: delete the save
 
+// todo: change the size
+// todo: settings page for excel save by button
+// todo: check the scroll on all the scenes
+
 
 public class Engine : MonoBehaviour {
 

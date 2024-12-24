@@ -38,7 +38,7 @@ public class ui_score : MonoBehaviour {
         tComposer.text = _score.Composer;
 
         if (_score.StartTime.Year > 1) {
-            tStart.text = _score.StartTime.ToString("dd-MM-yyyy");
+            tStart.text = _score.StartTime.ToString("dd.MM.yyyy");
         }
 
         if (_score.StartTime.Year > 1) {
