@@ -6,47 +6,30 @@ using UnityEngine;
 
 public class Logic {
 	public static string GetCodeByGrade(int grade) {
-
-		switch (grade) {
-			case 1:
-				return "A";
-			case 2:
-				return "B";
-			case 3:
-				return "C";
-			case 4:
-				return "D";
-			case 5:
-				return "E";
-			case 6:
-				return "F";
-			case 7:
-				return "G";
-			case 8:
-				return "H";
-			case 9:
-				return "I";
-			case 10:
-				return "J";
-			case 11:
-				return "K";
-			case 12:
-				return "L";
-			case 13:
-				return "Z";
-			case 14:
-				return "Y";
-			default:
-				return "A";
-		}
-
+		return grade switch {
+			1 => "A",
+			2 => "B",
+			3 => "C",
+			4 => "D",
+			5 => "E",
+			6 => "F",
+			7 => "G",
+			8 => "H",
+			9 => "I",
+			10 => "J",
+			11 => "K",
+			12 => "L",
+			13 => "Z",
+			14 => "Y",
+			_ => "A"
+		};
 	}
 
 	public static int GetNextIdByGrade(int grade) {
 		
 		var filteredGrade = Engine.ctrl.scores.Where(item => item.Grade == grade)
-								  .Select(item => item.N);
-		int max = 0;
+														.Select(item => item.N).ToList();
+		var max = 0;
 		if (filteredGrade.Any()) {
 			 max = filteredGrade.Max();
 		}
@@ -75,12 +58,11 @@ public class Logic {
 	}
 
 	public static int CountPrcByGrade(int gradeExp) {
-		int pr;
 		double p = 0;
 
 		var allMin = 15 * Engine.ctrl.recs
 									.SelectMany(rec => rec.Exercises)
-									.Sum(exercise => exercise._quarter);
+									.Sum(exercise => exercise.Quarter);
 		var allHours = allMin / 60;
 		
 		var allHoursGrade = CountAllHoursByGrade(gradeExp);
@@ -95,12 +77,11 @@ public class Logic {
 			}
 		}
 
-		pr = (int)p;
-		return pr;
+		return (int)p;
 	}
 
 	public static int CountAllHoursByGrade(int gradeExp) {
-		int h = 0;
+		var h = 0;
 		foreach (var v in Engine.ctrl.grades) {
 			if (gradeExp >= v.Exp) {
 				h += v.Hour;
@@ -111,11 +92,11 @@ public class Logic {
 	}
 	
 	public static int GetCurrentGrade() {
-		int l = 0;
+		var l = 0;
 	
 		var allMin = 15 * Engine.ctrl.recs
 								.SelectMany(rec => rec.Exercises)
-								.Sum(exercise => exercise._quarter);
+								.Sum(exercise => exercise.Quarter);
 		var allHours = allMin / 60;
 
 		foreach (var v in Engine.ctrl.grades) {
@@ -143,9 +124,52 @@ public class Logic {
 		
 		var rec = Engine.ctrl.recs.FirstOrDefault(r => r.Day == actualRecDay);
 
+		// Remove the exercise with the matching code
+		rec?.Exercises.RemoveAll(ex => ex.Code == s);
+	}
+
+	public static void CheckRecsForEmpty() {
+		foreach (var v in Engine.ctrl.recs.Where(v => v.Exercises.Count == 0)) {
+			Engine.ctrl.recs.Remove(v);
+			break;
+		}
+	}
+
+	public static void ChangePractice(DateTime actualRecDay, string s) {
+		var rec = Engine.ctrl.recs.FirstOrDefault(r => r.Day == actualRecDay);
+
 		if (rec != null) {
-			// Remove the exercise with the matching code
-			rec.Exercises.RemoveAll(ex => ex.Code == s);
+			var idx = rec.Exercises.FindIndex(ex => ex.Code == s);
+			if (idx == -1) return;
+			
+			// Get the exercise, modify it, and replace it back
+			var exercise = rec.Exercises[idx];
+			if (exercise.Quarter < 4) {
+				exercise.Quarter++; 
+			} else {
+				exercise.Quarter = 1;
+			}
+			rec.Exercises[idx] = exercise;
+		}
+	}
+
+	public static string GetPageName() {
+		return Engine.pageIdx switch {
+			0 => "Progress",
+			1 => "Scores",
+			2 => "Grades",
+			3 => "Scales",
+			_ => "Progress"
+		};
+	}
+
+	public static void UpdateScoreSts() {
+		for (var i = 0; i < Engine.ctrl.scores.Count; i++) {
+			if (Engine.ctrl.scores[i].StartTime.Year > 1 && Engine.ctrl.scores[i].EndTime.Year > 1) {
+				Engine.ctrl.scores[i].Sts = 2;
+			} else if (Engine.ctrl.scores[i].StartTime.Year > 1) {
+				Engine.ctrl.scores[i].Sts = 1;
+			}
 		}
 	}
 }

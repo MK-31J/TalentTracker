@@ -43,7 +43,7 @@ public class sc_score_create : MonoBehaviour {
         }
         
         bSave.onClick.AddListener(SaveScore);
-        bCancel.onClick.AddListener(Engine.ins.ShowScoreList);
+        bCancel.onClick.AddListener(Engine.ShowScoreList);
 
         iComposer.onValueChanged.AddListener(OnComposerInputChanged);
         iTitle.onValueChanged.AddListener(OnTitleInputChanged);
@@ -174,8 +174,8 @@ public class sc_score_create : MonoBehaviour {
     private void SaveScore() {
         _score = new Score(_n, _grade, iComposer.text, iTitle.text, _style);
         Engine.ctrl.scores.Add(Score.CreateScore(_score));
-        Engine.ins.SaveData();
-        Engine.ins.ShowScoreList();
+        Engine.SaveData();
+        Engine.ShowScoreList();
     }
     
 

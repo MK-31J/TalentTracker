@@ -32,7 +32,7 @@ public class CSVExporter {
 		foreach (var row in Engine.ctrl.recs) {
 			var str = $"{row.Day:dd.MM.yyyy}";
 			foreach (var exercise in row.Exercises) {
-				str += $",{exercise._code},{exercise._quarter}";
+				str += $",{exercise.Code},{exercise.Quarter}";
 			}
 			writer.WriteLine(str);
 		}

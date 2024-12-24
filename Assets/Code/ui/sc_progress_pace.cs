@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,10 +18,13 @@ public class sc_progress_pace : MonoBehaviour {
     public Button btnCancel;
 
     private void Start() {
-        btnAddRec.onClick.AddListener(Engine.ins.CreateRec);
-        btnScoreList.onClick.AddListener(Engine.ins.ShowScoreList);
-        btnGradePage.onClick.AddListener(Engine.ins.ShowGradePage);
-        btnScalePage.onClick.AddListener(Engine.ins.ShowScalePage);
+        
+        Engine.pageIdx = 0;
+        
+        btnAddRec.onClick.AddListener(Engine.CreateRec);
+        btnScoreList.onClick.AddListener(Engine.ShowScoreList);
+        btnGradePage.onClick.AddListener(Engine.ShowGradePage);
+        btnScalePage.onClick.AddListener(Engine.ShowScalePage);
         
         trPopup.gameObject.SetActive(false);
         btnCancel.onClick.AddListener(CancelChange);
@@ -41,16 +45,20 @@ public class sc_progress_pace : MonoBehaviour {
     private void RefreshInfo() {
         if (Controller.stsRecChange == 1) {
             trPopup.gameObject.SetActive(true);
+            // reset previous listener
             for (int i = 0; i < trExc.childCount; i++) {
                 trExc.GetChild(i).gameObject.SetActive(true);
                 trExc.GetChild(i).GetChild(1).GetComponent<Button>().onClick.RemoveAllListeners();
             }
+            // display popup exercises
             for (int i = 0; i < trExc.childCount; i++) {
                 if (i < Controller.actualRec.Exercises.Count) {
                     trExc.GetChild(i).GetChild(0).GetComponent<TextMeshProUGUI>().text =
                                                                     Controller.actualRec.Exercises[i].Code;
                     var n = i;
                     trExc.GetChild(i).GetChild(1).GetComponent<Button>().onClick.AddListener(
+                        delegate { IncPractice(Controller.actualRec.Exercises[n].Code); });
+                    trExc.GetChild(i).GetChild(2).GetComponent<Button>().onClick.AddListener(
                                                     delegate { DeleteExc(Controller.actualRec.Exercises[n].Code); });
                 } else {
                     trExc.GetChild(i).gameObject.SetActive(false);
@@ -65,11 +73,20 @@ public class sc_progress_pace : MonoBehaviour {
         }
     }
 
+    private void IncPractice(string s) {
+        trPopup.gameObject.SetActive(false);
+        Controller.stsRecChange = 0;
+        Logic.ChangePractice(Controller.actualRec.Day, s);
+        Engine.SaveData();
+        Engine.ui.updRecList = true;
+    }
+
     private void DeleteExc(string s) {
         trPopup.gameObject.SetActive(false);
         Controller.stsRecChange = 0;
         Logic.ChangeRec(Controller.actualRec.Day, s);
-        Engine.ins.SaveData();
+        Logic.CheckRecsForEmpty();
+        Engine.SaveData();
         Engine.ui.updRecList = true;
     }
 
@@ -77,17 +94,16 @@ public class sc_progress_pace : MonoBehaviour {
         
         if (Engine.ctrl.recs != null) {
             Engine.ui.DeleteDiv(trContent);
-            for (int i = 0; i < Engine.ctrl.recs.Count; i++) {
-
+            var sortedRecs = Engine.ctrl.recs.OrderBy(r => r.Day).ToList();
+            foreach (var t in sortedRecs) {
                 var script =  Engine.ui.MakeInstance(Engine.ui.pr_rec, trContent);
-                script.GetComponent<ui_rec>().rec = Engine.ctrl.recs[i];
-                // script.GetComponent<ui_rec>()._n = i;
+                script.GetComponent<ui_rec>().rec = t;
             }
         }
         
-        RectTransform rectTransform = trContent.GetComponent<RectTransform>();
-        Vector2 size = rectTransform.sizeDelta;
-        size.y = 150 * Engine.ctrl.scores.Count;
+        var rectTransform = trContent.GetComponent<RectTransform>();
+        var size = rectTransform.sizeDelta;
+        size.y = 150 * Engine.ctrl.recs.Count;
         rectTransform.sizeDelta = size;
     }
 }

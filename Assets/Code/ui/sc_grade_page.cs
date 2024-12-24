@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,13 +10,14 @@ public class sc_grade_page : MonoBehaviour {
 	public Button btnAddRec;
 
 	void Start() {
-        
-		btnScoresList.onClick.AddListener(Engine.ins.ShowScoreList);
-		btnProgress.onClick.AddListener(Engine.ins.ShowProgressPace);
-		btnScalePage.onClick.AddListener(Engine.ins.ShowScalePage);
-		btnAddRec.onClick.AddListener(Engine.ins.CreateRec);
 
-    
+		Engine.pageIdx = 2;
+		
+		btnScoresList.onClick.AddListener(Engine.ShowScoreList);
+		btnProgress.onClick.AddListener(Engine.ShowProgressPace);
+		btnScalePage.onClick.AddListener(Engine.ShowScalePage);
+		btnAddRec.onClick.AddListener(Engine.CreateRec);
+		
 		if (Engine.ctrl.grades != null) {
 			Engine.ui.DeleteDiv(trContent);
 			for (int i = 0; i < Engine.ctrl.grades.Count; i++) {
@@ -28,5 +27,4 @@ public class sc_grade_page : MonoBehaviour {
 			}
 		}
 	}
-	
 }

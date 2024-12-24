@@ -35,14 +35,14 @@ public class ui_rec : MonoBehaviour {
 		var t = 0;
 		var e = 0;
 		foreach (var v in rec.Exercises) {
-			workTime += v._quarter * 15;
-			if (!Logic.IsScoreExcByCode(v._code)) {
-				trRep.GetChild(t).GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = v._code;
-				ShowQuarters(trRep.GetChild(t).GetChild(1) ,v._quarter);
+			workTime += v.Quarter * 15;
+			if (!Logic.IsScoreExcByCode(v.Code)) {
+				trRep.GetChild(t).GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = v.Code;
+				ShowQuarters(trRep.GetChild(t).GetChild(1) ,v.Quarter);
 				t++;
 			} else {
-				trExc.GetChild(e).GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = v._code;
-				ShowQuarters(trExc.GetChild(e).GetChild(1) ,v._quarter);
+				trExc.GetChild(e).GetChild(0).GetChild(0).GetComponent<TextMeshProUGUI>().text = v.Code;
+				ShowQuarters(trExc.GetChild(e).GetChild(1) ,v.Quarter);
 				e++;
 			}
 
@@ -62,7 +62,7 @@ public class ui_rec : MonoBehaviour {
 	private void ShowQuarters(Transform tr, int vQuarter) {
 		for (int i = 0; i < tr.childCount; i++) {
 			if (i <= vQuarter-1) {
-				tr.GetChild(i).GetComponent<RawImage>().color = Color.cyan;
+				tr.GetChild(i).GetComponent<RawImage>().color = Meta.clHighlight;
 			}
 		}
 	}

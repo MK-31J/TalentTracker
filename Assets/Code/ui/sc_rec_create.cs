@@ -43,7 +43,7 @@ public class sc_rec_create : MonoBehaviour {
         }
         
         bSave.onClick.AddListener(SaveRec);
-        bCancel.onClick.AddListener(Engine.ins.ShowProgressPace);
+        bCancel.onClick.AddListener(Engine.ShowProgressPace);
 
         iComposer.onValueChanged.AddListener(OnComposerInputChanged);
         trComp.gameObject.SetActive(false);
@@ -167,8 +167,8 @@ public class sc_rec_create : MonoBehaviour {
                 if (t.Day.Date == _dt.Date) {
                     foreach (var t1 in t.Exercises) {
                         var exercise = t1;
-                        if (exercise._code == _code) {
-                            exercise._quarter += _quarter;
+                        if (exercise.Code == _code) {
+                            exercise.Quarter += _quarter;
                             found = true;
                         }
                     }
@@ -180,8 +180,8 @@ public class sc_rec_create : MonoBehaviour {
                 
             }
 
-            Engine.ins.SaveData();
-            Engine.ins.SetScene("ProgressPace");
+            Engine.SaveData();
+            Engine.SetScene("ProgressPace");
         }
     }
     

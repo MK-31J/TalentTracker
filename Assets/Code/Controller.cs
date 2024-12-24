@@ -15,13 +15,15 @@ public class Controller : MonoBehaviour {
     
     public static Rec actualRec;
     public static int stsRecChange;
+    
+    public static int showGradeScores;
+    public static int showMonthProgress;
 
     private void Awake() {
         scores = new List<Score>();
         recs = new List<Rec>();
         grades = new List<Grade>();
         InitGrades();
-        
 
     }
 
@@ -48,15 +50,9 @@ public class Controller : MonoBehaviour {
         grades.Add(new Grade(120, 300));
     }
 
-    void Start() {
+    private void Start() {
         GM.Load();
-
-        // scores.Add(new Score(4, 1, "Krieger", "Minuet in A Minor", 0, 1));
-        // scores.Add(new Score(5, 1, "Mozart", "MMMM", 0, 1));
-        // scores.Add(new Score(6, 1, "Duncombe", "DDD", 0, 1));
-        // GM.Save();
-
-
+        showGradeScores = 1;
     }
 
 

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
@@ -28,8 +29,9 @@ public class ui_score : MonoBehaviour {
     }
     
     private void DisplayData() {
- 
+
         bChange.onClick.AddListener(ChangeData);
+        tCode.color = Meta.clScoreStyle[_score.Style];
         
         tCode.text = _score.Code;
         tTitle.text = _score.Title;
@@ -40,9 +42,17 @@ public class ui_score : MonoBehaviour {
         }
 
         if (_score.StartTime.Year > 1) {
-            tDay.text = "d";
+            if (_score.EndTime.Year > 1) {
+                tDay.text = (_score.EndTime - _score.StartTime).Days + "d";
+
+            } else {
+                tDay.text = (DateTime.Today - _score.StartTime).Days + "d";
+            }
+            
         }
-        
+
+        bChange.transform.GetChild(0).GetComponent<Image>().color = Meta.clScoreSts[_score.Sts];
+
     }
 
     private void ChangeData() {

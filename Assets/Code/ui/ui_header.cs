@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -8,18 +7,21 @@ public class ui_header : MonoBehaviour {
 	public TextMeshProUGUI  tGrade;
 	public TextMeshProUGUI  tPrc;
 	public TextMeshProUGUI  tHead;
-	
-	
-	void Start() {
+
+
+	private void Start() {
 		StartCoroutine(ExecuteTasks());
 	}
 
-	IEnumerator ExecuteTasks() {
+	private IEnumerator ExecuteTasks() {
 		yield return new WaitForSeconds(0.001f); // Wait for 1 second
 		DisplayData();
 	}
 
 	private void DisplayData() {
+
+		tHead.text = Logic.GetPageName();
+		
 		var l = Logic.GetCurrentGrade();
 		int g;
 		

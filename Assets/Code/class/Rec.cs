@@ -41,8 +41,8 @@ public class Rec {
 [Serializable]
 public struct Exercise {
 	
-	public string _code;
-	public int _quarter;
+	private string _code;
+	private int _quarter;
 
 	public Exercise(string code, int quarter) {
 		_code = code;
