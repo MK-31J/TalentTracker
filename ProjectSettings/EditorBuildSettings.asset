@@ -26,4 +26,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ScalePage.unity
     guid: 4b0c488742e98504ba7af4d0c60104f5
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.adaptiveperformance.google.android.provider_settings: {fileID: 11400000, guid: beec1e2bbc4b1ab4bb469d9c57657bfe, type: 2}
+    com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: c308dfc0b68c18e45a11c4841a4eff8e, type: 2}
+    com.unity.adaptiveperformance.samsung.android.provider_settings: {fileID: 11400000, guid: 8990714c6ffe18046bc0fe95af285d9e, type: 2}
+    com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: aefa235dc776b8545a6dabc02e0e66a9, type: 2}

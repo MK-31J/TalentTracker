@@ -1,4 +1,4 @@
-# TalentTracker from MK [Magic Key] v1.0
+# TalentTracker from MK [Magic Key] Release v1.0
 
 TalentTracker application.
 
