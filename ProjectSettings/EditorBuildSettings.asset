@@ -26,6 +26,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ScalePage.unity
     guid: 4b0c488742e98504ba7af4d0c60104f5
+  - enabled: 1
+    path: Assets/Scenes/SettingsPage.unity
+    guid: 44cc19426d7a62e438c0e83e0eb65d08
   m_configObjects:
     com.unity.adaptiveperformance.google.android.provider_settings: {fileID: 11400000, guid: beec1e2bbc4b1ab4bb469d9c57657bfe, type: 2}
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: c308dfc0b68c18e45a11c4841a4eff8e, type: 2}
