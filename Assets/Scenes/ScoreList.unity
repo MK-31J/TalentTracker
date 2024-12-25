@@ -1487,8 +1487,9 @@ MonoBehaviour:
   btnAddScore: {fileID: 967726440}
   btnProgress: {fileID: 1604077426}
   btnGradePage: {fileID: 925626099}
-  btnScalePage: {fileID: 24640488}
+  btnScalePage: {fileID: 940990096}
   btnGradeScoreChange: {fileID: 677285786}
+  btnSettingsPage: {fileID: 24640488}
   trPopup: {fileID: 1163994465}
   iSts: {fileID: 17020286}
   tCode: {fileID: 265558346}

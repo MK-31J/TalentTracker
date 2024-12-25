@@ -18,8 +18,8 @@ public class UI : MonoBehaviour {
 	public bool updAll;
 
 
-	public static float widthScreen;
-
+	public static float heightScreen;
+	
 	// public bool updFooter;
 
 	// public bool updCounter;

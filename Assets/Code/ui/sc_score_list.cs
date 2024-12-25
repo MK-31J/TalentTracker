@@ -13,7 +13,8 @@ public class sc_score_list : MonoBehaviour {
     public Button btnGradePage;
     public Button btnScalePage;
     public Button btnGradeScoreChange;
-    
+    public Button btnSettingsPage;
+
     public Transform trPopup;
     public Image iSts;
     public TextMeshProUGUI  tCode;
@@ -46,7 +47,8 @@ public class sc_score_list : MonoBehaviour {
         btnProgress.onClick.AddListener(Engine.ShowProgressPace);
         btnScalePage.onClick.AddListener(Engine.ShowScalePage);
         btnGradePage.onClick.AddListener(Engine.ShowGradePage);
-        
+        btnSettingsPage.onClick.AddListener(Engine.ShowSettingsPage);
+
         btnST.onClick.AddListener(SetStCurrent);
         btnET.onClick.AddListener(SetFinCurrent);
         
@@ -110,8 +112,7 @@ public class sc_score_list : MonoBehaviour {
         for (var i = 0; i < filteredScores.Count; i++) {
 
             var script =  Engine.ui.MakeInstance(Engine.ui.pr_score, trContent);
-            script.GetComponent<ui_score>()._score = filteredScores[i];
-            script.GetComponent<ui_score>()._n = i;
+            script.GetComponent<ui_score>().score = filteredScores[i];
         }
 
         // RectTransform rectTransform = trContent.GetComponent<RectTransform>();
@@ -152,11 +153,11 @@ public class sc_score_list : MonoBehaviour {
             iStart.text = Controller.actualScore.StartTime.ToString("dd.MM.yyyy");
             iFinish.text = Controller.actualScore.EndTime.ToString("dd.MM.yyyy");
             
-            if (DateTime.ParseExact(iStart.text, format, CultureInfo.InvariantCulture).Year < 2000) {
+            if (DateTime.ParseExact(iStart.text, format, CultureInfo.InvariantCulture).Year < 1) {
                 btnSTm.interactable = false;
             }
         
-            if (DateTime.ParseExact(iFinish.text, format, CultureInfo.InvariantCulture).Year < 2000) {
+            if (DateTime.ParseExact(iFinish.text, format, CultureInfo.InvariantCulture).Year < 1) {
                 btnETm.interactable = false;
             }
             

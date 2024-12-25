@@ -22,7 +22,7 @@ public class ui_rec : MonoBehaviour {
 	}
 
 	IEnumerator ExecuteTasks() {
-		yield return new WaitForSeconds(0.001f); // Wait for 1 second
+		yield return new WaitForSeconds(0.1f); // Wait for 1 second
 		DisplayData();
 	}
     

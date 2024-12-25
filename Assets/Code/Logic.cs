@@ -161,6 +161,7 @@ public class Logic {
 			1 => "Scores",
 			2 => "Grades",
 			3 => "Scales",
+			4 => "Settings",
 			_ => "Progress"
 		};
 	}

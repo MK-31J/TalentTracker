@@ -7,6 +7,7 @@ public class sc_scale_page : MonoBehaviour {
     public Button btnProgress;
     public Button btnGradePage;
     public Button btnAddRec;
+	public Button btnSettingsPage;
 
 	private void Start() {
 
@@ -16,7 +17,8 @@ public class sc_scale_page : MonoBehaviour {
 		btnProgress.onClick.AddListener(Engine.ShowProgressPace);
 		btnGradePage.onClick.AddListener(Engine.ShowGradePage);
 		btnAddRec.onClick.AddListener(Engine.CreateRec);
-		
+		btnSettingsPage.onClick.AddListener(Engine.ShowSettingsPage);
+
 	}
 
 }
