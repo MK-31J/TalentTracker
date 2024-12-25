@@ -5,8 +5,9 @@ using UnityEngine.SceneManagement;
 // todo: delete the save
 
 // todo: change the size
-// todo: settings page for excel save by button
+// todo: settings page for excel save by button or delete old files
 // todo: check the scroll on all the scenes
+// todo: first open scene not loaded
 
 
 public class Engine : MonoBehaviour {
@@ -34,11 +35,12 @@ public class Engine : MonoBehaviour {
     private static void InitGame() {
         
         Screen.orientation = ScreenOrientation.Portrait;
+        // UI.heightScreen = Screen.height;
 
     }
 
-    public void EndGame() {
-        GM.Save();
+    public static void ExitApp() {
+        SaveData();
         Input.backButtonLeavesApp = true;
         Application.Quit();
     }
@@ -100,7 +102,10 @@ public class Engine : MonoBehaviour {
     public static void ShowScalePage() {
         SetScene("ScalePage");
     }
-    
+
+    public static void ShowSettingsPage() {
+        SetScene("SettingsPage");
+    }
 }
 
 

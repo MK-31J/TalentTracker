@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
 public class CSVExporter {
 	
 	public static void ExportScoresToCSV() {
-		string fileName = "ScoresDataExported_" + DateTime.Today.ToString("yy_MM_dd") + ".csv";
+		string fileName = "TalentTracker_ScoresExported_" + DateTime.Today.ToString("yy_MM_dd") + ".csv";
 		var filePath = Path.Combine(Application.persistentDataPath, fileName);
 		using var writer = new StreamWriter(filePath);
 		
@@ -21,7 +20,7 @@ public class CSVExporter {
 	
 	// todo: loop the exercise
 	public static void ExportProgressToCSV() {
-		string fileName = "PianoDataExported_" + DateTime.Today.ToString("yy_MM_dd") + ".csv";
+		string fileName = "TalentTracker_DataExported_" + DateTime.Today.ToString("yy_MM_dd") + ".csv";
 		var filePath = Path.Combine(Application.persistentDataPath, fileName);
 		using var writer = new StreamWriter(filePath);
 		

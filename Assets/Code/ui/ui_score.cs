@@ -1,15 +1,12 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Globalization;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ui_score : MonoBehaviour {
     
-    public Score _score;
-    public int _n;
+    public Score score;
 
     public TextMeshProUGUI  tCode;
     public TextMeshProUGUI  tTitle;
@@ -18,54 +15,47 @@ public class ui_score : MonoBehaviour {
     public TextMeshProUGUI  tDay;
     public Button bChange;
 
-    void Start() {
+    private void Start() {
         
         StartCoroutine(ExecuteTasks());
     }
 
-    IEnumerator ExecuteTasks() {
-        yield return new WaitForSeconds(0.001f); // Wait for 1 second
+    private IEnumerator ExecuteTasks() {
+        yield return new WaitForSeconds(0.1f); // Wait for 1 second
         DisplayData();
     }
     
     private void DisplayData() {
 
         bChange.onClick.AddListener(ChangeData);
-        tCode.color = Meta.clScoreStyle[_score.Style];
+        tCode.color = Meta.clScoreStyle[score.Style];
         
-        tCode.text = _score.Code;
-        tTitle.text = _score.Title;
-        tComposer.text = _score.Composer;
+        tCode.text = score.Code;
+        tTitle.text = score.Title;
+        tComposer.text = score.Composer;
 
-        if (_score.StartTime.Year > 1) {
-            tStart.text = _score.StartTime.ToString("dd.MM.yyyy");
+        if (score.StartTime.Year > 1) {
+            tStart.text = score.StartTime.ToString("dd.MM.yyyy");
         }
 
-        if (_score.StartTime.Year > 1) {
-            if (_score.EndTime.Year > 1) {
-                tDay.text = (_score.EndTime - _score.StartTime).Days + "d";
+        if (score.StartTime.Year > 1) {
+            if (score.EndTime.Year > 1) {
+                tDay.text = (score.EndTime - score.StartTime).Days+1 + "d";
 
             } else {
-                tDay.text = (DateTime.Today - _score.StartTime).Days + "d";
+                tDay.text = (DateTime.Today - score.StartTime).Days+1 + "d";
             }
             
         }
 
-        bChange.transform.GetChild(0).GetComponent<Image>().color = Meta.clScoreSts[_score.Sts];
+        bChange.transform.GetChild(0).GetComponent<Image>().color = Meta.clScoreSts[score.Sts];
 
     }
 
     private void ChangeData() {
-        Controller.actualScore = _score;
+        Controller.actualScore = score;
         Controller.stsScoreChange = 1;
     }
-
-
-
-    
-
-
-
-        
+       
 
 }

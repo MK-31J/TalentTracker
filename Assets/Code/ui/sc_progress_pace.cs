@@ -7,11 +7,13 @@ using UnityEngine.UI;
 
 public class sc_progress_pace : MonoBehaviour {
     
+    public ScrollRect  trScroll;
     public Transform trContent;
     public Button btnAddRec;
     public Button btnGradePage;
     public Button btnScalePage;
     public Button btnScoreList;
+    public Button btnSettingsPage;
     
     public Transform trPopup;
     public TextMeshProUGUI tTop;
@@ -22,15 +24,19 @@ public class sc_progress_pace : MonoBehaviour {
         
         Engine.pageIdx = 0;
         
+        UI.heightScreen = transform.GetComponent<RectTransform>().rect.height;
+
         btnAddRec.onClick.AddListener(Engine.CreateRec);
         btnScoreList.onClick.AddListener(Engine.ShowScoreList);
         btnGradePage.onClick.AddListener(Engine.ShowGradePage);
         btnScalePage.onClick.AddListener(Engine.ShowScalePage);
+        btnSettingsPage.onClick.AddListener(Engine.ShowSettingsPage);
         
         trPopup.gameObject.SetActive(false);
         btnCancel.onClick.AddListener(CancelChange);
         
         FillRecList();
+        trScroll.verticalNormalizedPosition = 0f;
     }
 
     
@@ -105,7 +111,12 @@ public class sc_progress_pace : MonoBehaviour {
         
         var rectTransform = trContent.GetComponent<RectTransform>();
         var size = rectTransform.sizeDelta;
-        size.y = 150 * Engine.ctrl.recs.Count;
+        if (105 * Engine.ctrl.recs.Count < UI.heightScreen-300) {
+            size.y = UI.heightScreen-300;
+        
+        } else {
+            size.y = 105 * Engine.ctrl.recs.Count;
+        }
         rectTransform.sizeDelta = size;
     }
 }
